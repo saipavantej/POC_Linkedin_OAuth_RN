@@ -10,8 +10,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "querystring": "^0.2.1",
     "react": "18.2.0",
-    "react-native": "0.73.2"
+    "react-native": "0.73.2",
+    "react-native-webview": "^13.6.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

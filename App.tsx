@@ -1,118 +1,74 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, {useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import querystring from 'querystring';
+import WebView, {WebViewNavigation} from 'react-native-webview';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+const REDIRECT_URI = 'http://localhost:8081/auth'; // this needs to be the same as your LinkedIn app panel
+const CLIENT_ID = '86fto5sct9z7xl'; // you can get it from the LinkedIn apps panel
+// const CLIENT_SECRET = '0IrMTMfkXXWrmV1m'; //you can get it from the LinkedIn apps panel
+const AUTH_BASE = 'https://www.linkedin.com/oauth/v2/authorization';
+const SCOPE = 'openid,email,profile';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const qs = [
+  `client_id=${CLIENT_ID}`,
+  `response_type=code`,
+  `scope=${SCOPE}`,
+  `redirect_uri=${REDIRECT_URI}`,
+];
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+const AUTH_ENDPOINT = `${AUTH_BASE}?${qs.join('&')}`;
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+const LinkedInAuth = () => {
+  const [token, setToken] = useState('');
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  const loadStart = ({url}: WebViewNavigation) => {
+    if (!url) {
+      return;
+    }
+    const matches = url.match(REDIRECT_URI);
+    if (matches && matches.length && url) {
+      const obj = querystring.parse(url.split('?').pop() as string);
+      if (obj.code) {
+        setToken(obj.code as string);
+        console.log('---->>>', obj.code);
+      }
+    }
   };
 
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
+  const renderContent = () => {
+    if (token) {
+      return <Text>Auth success: {token}</Text>;
+    } else {
+      return (
+        <WebView
+          style={styles.wv}
+          source={{uri: AUTH_ENDPOINT}}
+          javaScriptEnabled
+          domStorageEnabled
+          onNavigationStateChange={loadStart}
+        />
+      );
+    }
+  };
+
+  return <View style={styles.container}>{renderContent()}</View>;
+};
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
+  wv: {
+    flex: 1,
+    width: 380,
+    height: 300,
+    marginVertical: 20,
+    borderWidth: 1,
+    borderColor: '#333',
   },
 });
 
-export default App;
+export default LinkedInAuth;
