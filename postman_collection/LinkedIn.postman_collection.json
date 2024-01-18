@@ -1,0 +1,411 @@
+{
+	"info": {
+		"_postman_id": "de0ce00d-12fb-4374-a54d-2339db79cb67",
+		"name": "LinkedIn",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32293165"
+	},
+	"item": [
+		{
+			"name": "accessToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseBody = pm.response.json();",
+							"if (responseBody && responseBody.access_token) {",
+							"    pm.collectionVariables.set('access_token', responseBody.access_token);",
+							"    console.log('Access token set in collection variables:', responseBody.access_token);",
+							"} else {",
+							"    console.error('Access token not found in the response.');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "86fto5sct9z7xl",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "0IrMTMfkXXWrmV1m",
+							"type": "text"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:8081/auth",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://www.linkedin.com/oauth/v2/accessToken",
+					"protocol": "https",
+					"host": [
+						"www",
+						"linkedin",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"v2",
+						"accessToken"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "accessToken sample request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "AQQP2LmMS22isd-Y8e72yBrEfb7YAxnW-tY-31q5a6N83VDG2r2NoarxPFWWoWYXgW9Dd1IEC9VKKWVeWKCBwrQRC7z0mz11RgDiAAKO0MeLKGuAtpVjbJDLs9dqiDks1bMysDqHtLO5dBaTYaDU7snh2pA5HBcdrBAQga0AoL9gqC4EEvSZknyQhGyNYX9kphk-rxXF1IbHReC9vxI",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "86fto5sct9z7xl",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "0IrMTMfkXXWrmV1m",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost:8081/auth",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://www.linkedin.com/oauth/v2/accessToken",
+							"protocol": "https",
+							"host": [
+								"www",
+								"linkedin",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"v2",
+								"accessToken"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1422"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "lidc=\"b=OB20:s=O:r=O:a=O:p=O:g=4564:u=1:x=1:i=1705607019:t=1705671295:v=2:sig=AQFlUlxXH55zHH0gm2PW4WB7ssGJAte9\"; Expires=Fri, 19 Jan 2024 13:34:55 GMT; domain=.linkedin.com; Path=/; SameSite=None; Secure"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "bcookie=\"v=2&13c64d54-5df9-4170-84e9-ffe2b831b59f\"; domain=.linkedin.com; Path=/; Secure; Expires=Fri, 17-Jan-2025 19:43:39 GMT; SameSite=None"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "bscookie=\"v=1&20240118181926d97e9bf8-8206-45f6-83a0-8654f3e10ccbAQHZioMJl81PK7y4Bnn03WUFeH1aZ9CH\"; domain=.www.linkedin.com; Path=/; Secure; Expires=Fri, 17-Jan-2025 19:43:39 GMT; HttpOnly; SameSite=None"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "sameorigin"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src *; connect-src 'self' *.licdn.com *.linkedin.com wss://*.linkedin.com dpm.demdex.net/id lnkd.demdex.net blob: accounts.google.com/gsi/ linkedin.sc.omtrdc.net/b/ss/ *.qualtrics.com *.adyen.com *.microsoft.com; img-src data: blob: *; font-src data: *; style-src 'unsafe-inline' 'self' static-src.linkedin.com *.licdn.com; script-src 'unsafe-inline' 'unsafe-eval' 'self' platform.linkedin.com platform-akam.linkedin.com platform-ecst.linkedin.com platform-azur.linkedin.com spdy.linkedin.com static-src.linkedin.com *.ads.linkedin.com *.licdn.com static.chartbeat.com bcvipva02.rightnowtech.com www.bizographics.com sjs.bizographics.com js.bizographics.com d.la4-c1-was.salesforceliveagent.com; script-src-attr 'report-sample' 'none'; object-src 'none'; media-src blob: *; worker-src 'self' blob: static.licdn.com static-exp1.licdn.com static-exp2.licdn.com static-exp3.licdn.com; frame-src blob: lnkd-communities: voyager: *; frame-ancestors 'self' *.linkedin.com teams.microsoft.com client.learningapp.microsoft.com; report-uri https://www.linkedin.com/security/csp?f=lt"
+						},
+						{
+							"key": "X-Li-Fabric",
+							"value": "prod-lor1"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"group\":\"network-errors\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://www.linkedin.com/li/rep\"}],\"include_subdomains\":true}"
+						},
+						{
+							"key": "NEL",
+							"value": "{\"report_to\":\"network-errors\",\"max_age\":1296000,\"success_fraction\":0.00066,\"failure_fraction\":1,\"include_subdomains\":true}"
+						},
+						{
+							"key": "X-FS-UUID",
+							"value": "00060f3d94884fc5bf87e55e7cfe4092"
+						},
+						{
+							"key": "X-Li-Pop",
+							"value": "afd-prod-lor1-x"
+						},
+						{
+							"key": "X-Li-Proto",
+							"value": "http/1.1"
+						},
+						{
+							"key": "X-LI-UUID",
+							"value": "AAYPPZSIT8W/h+VefP5Akg=="
+						},
+						{
+							"key": "X-Cache",
+							"value": "CONFIG_NOCACHE"
+						},
+						{
+							"key": "X-MSEdge-Ref",
+							"value": "Ref A: CB70E40BA9EE44F69D7883B52DEDAAA1 Ref B: MAA01EDGE0817 Ref C: 2024-01-18T19:43:39Z"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Jan 2024 19:43:38 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"AQXetCssCb4HzAXbjmaCI0fZjovhGReoUFGA_Fc5TZxiqVIV3LIAoVwFYyONYILuGiuN-kl9kFbaMNjhKBEEBG8qhAiip53wDThaxKvygK1_Yn51JRcbv4net73SE3L8-DnNs_nIqfQsOwckk-oEsPQe_hiwEeo5YnaFvGTArVQXPBebsGe-_QXgdlqIwNxv7eyaqPVbs4WXmPPUy_nLdnnaNdeb-SHCSGvGW1rTjJ3SD8CqkB3BK0DqIDHJ5yJMhy1NYlDolqAp4tFL2bF5uhz5YHSUq_HcUwalBvksP1O3iJEWnI_gsJZyVCyCvcaicITUYRRs_AF2Cgh8k1oc0urhVy7zTA\",\n    \"expires_in\": 5183999,\n    \"scope\": \"email,openid,profile\",\n    \"token_type\": \"Bearer\",\n    \"id_token\": \"eyJ6aXAiOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImQ5Mjk2NjhhLWJhYjEtNGM2OS05NTk4LTQzNzMxNDk3MjNmZiIsImFsZyI6IlJTMjU2In0.eyJpc3MiOiJodHRwczovL3d3dy5saW5rZWRpbi5jb20iLCJhdWQiOiI4NmZ0bzVzY3Q5ejd4bCIsImlhdCI6MTcwNTYwNzAxOSwiZXhwIjoxNzA1NjEwNjE5LCJzdWIiOiJDUEJDNndWVHRrIiwibmFtZSI6Im1pZ3JhdGlvbnRlc3RlciBNQ1AiLCJnaXZlbl9uYW1lIjoibWlncmF0aW9udGVzdGVyIiwiZmFtaWx5X25hbWUiOiJNQ1AiLCJwaWN0dXJlIjoiaHR0cHM6Ly9tZWRpYS5saWNkbi5jb20vZG1zL2ltYWdlL0Q0RDAzQVFGUUlTdmQwRlJYOUEvcHJvZmlsZS1kaXNwbGF5cGhvdG8tc2hyaW5rXzEwMF8xMDAvMC8xNzA1NTY2Nzg0MzE2P2U9MjE0NzQ4MzY0NyZ2PWJldGEmdD1Vdl8xMGFUeVpFLU1aY0JqelRzb3NnVVN3OU5GRS1MUzJNR1RSWHJuaWprIiwiZW1haWwiOiJtY3BtaWdyYXRpb250ZXN0ZXJAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOiJ0cnVlIiwibG9jYWxlIjoiZW5fVVMifQ.mHPq6vt49GCsUJbe_BMCfaJvWjJDuMcwbjTP78-cWH41JCyA1vyBS7oaz5EE2fuycWLVIumKW81M8tnLhXRdlh5hyPbrIq4rff4pkcotWVDBKa51MKz5SigfaVKGLTYKYnhVZ8baLGcMP1XK0mGgTfG4t36dm3h1ehrYCDal51Oo5OgQNf8o3I_YsK9n3VpPOCEXeaxCyiSKIOHcHqRqIZNbge0m9HUzY2aE4m2JdhpfSftWc8p74AdZvAFgUwOK6qJVVapT24qpOkTWQblO_pOEnqIJY1aktpBe6WIcNgeaiREOjf38rRNysHYjybLiyEFNMfMs494JF2p7WyA78em0Zl2aLEoORTg-Ysg-C18TqL1kf_s26afsgrAs7PDa_7xNkSz6HEmb_Fx6W7wMmNB-7ad7c02evkT1YSrX7qenve35jYktO_x13TY2mfJkJ00RkL0Nqqj39dG5gvNLZ3lfX_M6mJSe7GPB_cupwxT-g4m7hbf-ho3USf6yvXAfikHb8CoMpCHrr5kw6DdIZc2FsI9gs_Gq0lGM8j2XeZqHqdWbkCagY-iTP0GSdZABoK6gsYWs7JjS_iKJUQnA3eINu_zX7QUnYWomTtZrcZlxcYWF0oPob7Qk8pwExTFAC6onpwCVTruNTw7Nf6X65VvroyxUwrNUhxVZSlMJG4Y\"\n}"
+				}
+			]
+		},
+		{
+			"name": "userInfo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://api.linkedin.com/v2/userinfo",
+					"protocol": "https",
+					"host": [
+						"api",
+						"linkedin",
+						"com"
+					],
+					"path": [
+						"v2",
+						"userinfo"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "userInfo sample Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://api.linkedin.com/v2/userinfo",
+							"protocol": "https",
+							"host": [
+								"api",
+								"linkedin",
+								"com"
+							],
+							"path": [
+								"v2",
+								"userinfo"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-li-responseorigin",
+							"value": "RGW"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "x-restli-protocol-version",
+							"value": "1.0.0"
+						},
+						{
+							"key": "Content-Length",
+							"value": "387"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 18 Jan 2024 19:45:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Li-Fabric",
+							"value": "prod-lor1"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"group\":\"network-errors\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://www.linkedin.com/li/rep\"}],\"include_subdomains\":true}"
+						},
+						{
+							"key": "NEL",
+							"value": "{\"report_to\":\"network-errors\",\"max_age\":1296000,\"success_fraction\":0.00066,\"failure_fraction\":1,\"include_subdomains\":true}"
+						},
+						{
+							"key": "X-Li-Pop",
+							"value": "prod-lor1-x"
+						},
+						{
+							"key": "X-LI-Proto",
+							"value": "http/1.1"
+						},
+						{
+							"key": "X-LI-UUID",
+							"value": "AAYPPZqFoiwAxZvlPTWMMg=="
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "lidc=\"b=OB20:s=O:r=O:a=O:p=O:g=4564:u=1:x=1:i=1705607120:t=1705671295:v=2:sig=AQGD5umXx8RaDvylWpvj7s-ONIXNJjda\""
+						},
+						{
+							"key": "X-LI-Route-Key",
+							"value": "\"b=OB20:s=O:r=O:a=O:p=O:g=4564:u=1:x=1:i=1705607120:t=1705671295:v=2:sig=AQGD5umXx8RaDvylWpvj7s-ONIXNJjda\""
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"sub\": \"CPBC6wVTtk\",\n    \"email_verified\": true,\n    \"name\": \"migrationtester MCP\",\n    \"locale\": {\n        \"country\": \"US\",\n        \"language\": \"en\"\n    },\n    \"given_name\": \"migrationtester\",\n    \"family_name\": \"MCP\",\n    \"email\": \"mcpmigrationtester@gmail.com\",\n    \"picture\": \"https://media.licdn.com/dms/image/D4D03AQFQISvd0FRX9A/profile-displayphoto-shrink_100_100/0/1705566784316?e=1710979200&v=beta&t=TPMdIzlMNLbxmLRJJO9Vw-Zn27RTl928b5kd0LVZmUM\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "access_token",
+			"value": ""
+		},
+		{
+			"key": "authorization_code",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
